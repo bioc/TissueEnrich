@@ -82,7 +82,10 @@ In `teEnrichment`, the user can specify the type of tissue-specific genes (`tiss
 The hypergeometric test is used to calculate tissue-specific gene enrichment. The p-value is calculated as:
 
 $$ P(X \gt k) = \sum\limits_{i=k+1}^n \frac{{{K}\choose{i}} {{N-K}\choose{n-i}}}{{{N}\choose{n}}} $$
-Where, N is the total number of genes, K is the total number of tissue-specific genes for a tissue, n is the number of genes in the input gene set, k is the number of tissue-specific genes in the input gene set. The p-values can be corrected for multiple hypothesis testing using the Bonferroni Hochberg correction by setting `multiHypoCorrection = TRUE` (It is `TRUE` by default).
+and the fold-change is calculated as:
+$$ Fold-change =\left( \frac{k}{n} \right)/\left( \frac{K}{N} \right) $$
+
+Where, N is the total number of genes, K is the total number of tissue-specific genes for a tissue, n is the number of genes in the input gene set, k is the number of tissue-specific genes in the input gene set. The p-values can be corrected for multiple hypothesis testing using the Benjamini & Hochberg correction by setting `multiHypoCorrection = TRUE` (It is `TRUE` by default).
 
 ## Example: Tissue-specific gene enrichment
 This example uses trophectoderm (TE) specific genes identified from single cell RNA-Seq analyses, performed on human blastocysts on days 5, 6, and 7 of preimplantation development [@Petropoulos2016]. The single cells are assigned to either the inner cell mass (epiblast plus emerging extraembryonic endoderm) or the TE using PCA. After that, a list of 100 TE-specific genes was generated using differential gene expression analysis [@Petropoulos2016]. We used those 100 genes as the input gene set and carried out tissue-specific gene enrichment using the tissue-specific genes defined by the HPA dataset.
