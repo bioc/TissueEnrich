@@ -103,6 +103,9 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
         bgGenesFlag <- TRUE
         geBackgroundGenes <- backgroundGenes
         backgroundGenes <- geneIds(geBackgroundGenes)
+
+    }else
+    {
         message("No background list provided. Using all the
                 genes as background.")
     }
