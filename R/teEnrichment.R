@@ -92,7 +92,7 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
 
     backgroundGenes <- ensurer::ensure_that(backgroundGenes,
         is.null(.) || (class(.) == "GeneSet" && !is.null(geneIds(.)) &&
-        length(intersect(inputGenes,geneIds(.))) == length(inputGenes)),
+        length(intersect(inputGenes,geneIds(.))) == length(unique(inputGenes))),
         err_desc = "Please enter correct backgroundGenes.
                     It should be a Gene set object.
                     All input genes must be present in the background list")
