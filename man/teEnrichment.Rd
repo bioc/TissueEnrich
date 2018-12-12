@@ -31,7 +31,7 @@ be present in the background gene list. If not provided all the genes
 will be used as background.}
 }
 \value{
-The output is a list with three objects. The first object is the
+The output is a list with four objects. The first object is the
 SummarizedExperiment object containing the enrichment results, the second
 and the third object contains the expression values and tissue-specificity
 information of the tissue-specific genes for genes from the input

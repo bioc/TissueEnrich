@@ -40,7 +40,7 @@ teGeneRetrieval <- function(expressionData, foldChangeThreshold = 5,
     maxNumberOfTissues = 7, expressedGeneThreshold = 1) {
     ### Add checks for the conditions
     expressionData <- ensurer::ensure_that(expressionData,
-        !is.null(.) && class(.) == "SummarizedExperiment" &&
+        !is.null(.) && is(.,"SummarizedExperiment") &&
             !is.null(assay(.)) && (nrow(assay(.)) >
             0) && (ncol(assay(.)) > 1) && (ncol(rowData(.)) ==
             1) && (ncol(colData(.)) == 1),

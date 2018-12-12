@@ -1,7 +1,7 @@
 Package: TissueEnrich
 Type: Package
 Title: Tissue-specific gene enrichment analysis
-Version: 1.2.0
+Version: 1.2.1
 Authors@R: c(person("Ashish Jain",
         email="jain@iastate.edu",
         role=c("aut", "cre")), person("Geetu Tuteja",
@@ -23,5 +23,5 @@ Imports:
 Suggests: knitr, rmarkdown, testthat
 Encoding: UTF-8
 LazyData: true
-RoxygenNote: 6.0.1
+RoxygenNote: 6.1.1
 biocViews: GeneSetEnrichment, GeneExpression, Sequencing

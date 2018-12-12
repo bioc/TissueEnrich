@@ -63,13 +63,13 @@ teEnrichmentCustom <- function(inputGenes = NULL, tissueSpecificGenes = NULL,
     backgroundGenes = NULL) {
     # start.time <- Sys.time()
     ### Add checks for the conditions
-    inputGenes <- ensurer::ensure_that(inputGenes, !is.null(.) && (class(.) ==
-        "GeneSet") && !is.null(geneIds(.)),
+    inputGenes <- ensurer::ensure_that(inputGenes, !is.null(.) &&
+        (is(.,"GeneSet")) && !is.null(geneIds(.)),
         err_desc = "Please enter correct inputGenes.
                     It should be a Gene set object.")
     ## Check for dataset class, rows and should not be NULL
     tissueSpecificGenes <- ensurer::ensure_that(tissueSpecificGenes,
-        !is.null(.) && class(.) == "SummarizedExperiment" &&
+        !is.null(.) && is(.,"SummarizedExperiment") &&
         !is.null(assay(.)) &&
         (nrow(assay(.)) > 0) &&
         (ncol(assay(.)) > 1) &&
@@ -117,7 +117,7 @@ teEnrichmentCustom <- function(inputGenes = NULL, tissueSpecificGenes = NULL,
     inputGenes <- unique(inputGenes)
 
     backgroundGenes <- ensurer::ensure_that(backgroundGenes,
-        is.null(.) || (class(.) == "GeneSet" && !is.null(geneIds(.)) &&
+        is.null(.) || (is(.,"GeneSet") && !is.null(geneIds(.)) &&
         length(intersect(inputGenes,geneIds(.))) == length(inputGenes)),
         err_desc = "Please enter correct backgroundGenes.
         It should be a Gene set object.
