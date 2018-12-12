@@ -28,7 +28,7 @@ utils::globalVariables(c("dataset", "%>%", "Gene",
 #' be present in the background gene list. If not provided all the genes
 #' will be used as background.
 #' @export
-#' @return The output is a list with three objects. The first object is the
+#' @return The output is a list with four objects. The first object is the
 #' SummarizedExperiment object containing the enrichment results, the second
 #' and the third object contains the expression values and tissue-specificity
 #' information of the tissue-specific genes for genes from the input
@@ -66,7 +66,7 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
     backgroundGenes = NULL) {
     ### Add checks for the conditions
     inputGenes <- ensurer::ensure_that(inputGenes,
-        !is.null(.) && (class(.) == "GeneSet") && !is.null(geneIds(.)),
+        !is.null(.) && (is(.,"GeneSet")) && !is.null(geneIds(.)),
         err_desc = "Please enter correct inputGenes.
                     It should be a Gene set object.")
     rnaSeqDataset <- ensurer::ensure_that(rnaSeqDataset,
@@ -91,7 +91,7 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
     inputGenes <- geneIds(inputGenes)
 
     backgroundGenes <- ensurer::ensure_that(backgroundGenes,
-        is.null(.) || (class(.) == "GeneSet" && !is.null(geneIds(.)) &&
+        is.null(.) || (is(.,"GeneSet") && !is.null(geneIds(.)) &&
         length(intersect(inputGenes,geneIds(.))) == length(unique(inputGenes))),
         err_desc = "Please enter correct backgroundGenes.
                     It should be a Gene set object.
@@ -305,6 +305,8 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
             colData = colnames(teInputGeneGroups))
         tissueName <- tissueDetails[tissueDetails$RName ==
             tissue, "TissueName"]
+        samples <- tissueDetails[tissueDetails$RName ==
+                                    tissue, "Sample"]
         nTeGenesInTissue <- nrow(tissueGenes)
         nTotalGenes <- nrow(geneMappingForCurrentDataset)
         nTotalInputGenes <- length(inputEnsemblGenes)
@@ -314,7 +316,7 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
         foldChange <- (overlapGenes/nTotalInputGenes)/
             (nTeGenesInTissue/nTotalGenes)
         return(c(pValue, overlapGenes, tissueName,
-            seTeExpressionData, seTeInputGeneGroups,foldChange))
+            seTeExpressionData, seTeInputGeneGroups,foldChange,samples))
     })
 
     df <- do.call("rbind", x)
@@ -327,6 +329,7 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
     output <- data.frame(Log10PValue=pValueList,
                             Tissue.Specific.Genes=unlist(df[, 2]),
                                 fold.change=unlist(df[, 6]),
+                                samples=unlist(df[, 7]),
                                 row.names = unlist(df[, 3]))
     seOutput <- SummarizedExperiment(assays = SimpleList(as.matrix(output)),
         rowData = row.names(output), colData = colnames(output))
