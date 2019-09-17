@@ -1,3 +1,6 @@
+FEATURES IN VERSION 1.4.1
+o Fixed an error n the vigentte due to chnages in tidyr package.
+
 FEATURES IN VERSION 1.13
 -----------------------
 o Now the tool also calculates the fold-change and give it in the output.

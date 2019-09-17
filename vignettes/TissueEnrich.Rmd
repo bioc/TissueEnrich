@@ -160,9 +160,9 @@ library(tidyr)
 seExp<-output[[2]][["Placenta"]]
 exp<-setNames(data.frame(assay(seExp), row.names = rowData(seExp)[,1]), colData(seExp)[,1])
 exp$Gene<-row.names(exp)
-exp<-exp %>% gather(Tissue=1:(ncol(exp)-1))
+exp<-exp %>% gather(key = "Tissue", value = "expression",1:(ncol(exp)-1))
 
-ggplot(exp, aes(key, Gene)) + geom_tile(aes(fill = value),
+ggplot(exp, aes(Tissue, Gene)) + geom_tile(aes(fill = expression),
      colour = "white") + scale_fill_gradient(low = "white",
      high = "steelblue")+
      labs(x='', y = '')+
