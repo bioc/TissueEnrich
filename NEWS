@@ -1,3 +1,7 @@
+FEATURES IN VERSION 1.10.1
+o Fixed an issue with the teEnrichmentCustom function (flow with background genes).
+o Check on the maximum number of tissues in teGeneRetrieval function.
+
 FEATURES IN VERSION 1.4.1
 o Fixed an error n the vigentte due to chnages in tidyr package.
 
