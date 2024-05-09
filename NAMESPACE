@@ -1,5 +1,4 @@
 import(ggplot2)
-import(ensurer)
 import(dplyr)
 import(SummarizedExperiment)
 importFrom(GSEABase,GeneSet,SymbolIdentifier,EntrezIdentifier)

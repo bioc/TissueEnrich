@@ -39,32 +39,32 @@ utils::globalVariables(c("%>%", "Gene", ".", "geneIdType",
 teGeneRetrieval <- function(expressionData, foldChangeThreshold = 5,
     maxNumberOfTissues = 7, expressedGeneThreshold = 1) {
     ### Add checks for the conditions
-    expressionData <- ensurer::ensure_that(expressionData,
-        !is.null(.) && is(.,"SummarizedExperiment") &&
-            !is.null(assay(.)) && (nrow(assay(.)) >
-            0) && (ncol(assay(.)) > 1) && (ncol(rowData(.)) ==
-            1) && (ncol(colData(.)) == 1),
-            err_desc = "expressionData should be a
-                        non-empty SummarizedExperiment object
-                        with atleast 1 gene and 2 tissues.")
-    foldChangeThreshold <- ensurer::ensure_that(foldChangeThreshold,
-        !is.null(.) && is.numeric(.) && (. >= 1),
-            err_desc = "foldChangeThreshold should be a
-                        numeric value greater than
-                        or equal to 1.")
-    maxNumberOfTissues <- ensurer::ensure_that(maxNumberOfTissues,
-                                !is.null(.) && is.numeric(.) && (. >= 2)
-                                && (. <= ncol(expressionData)),
-                                err_desc = "maxNumberOfTissues should be an
-                                integer value greater than or
-                                equal to 2 and less than the number
-                                of tissues in the expression data.")
-
-    expressedGeneThreshold <- ensurer::ensure_that(expressedGeneThreshold,
-        !is.null(.) && is.numeric(.) && (. >= 0),
-            err_desc = "expressedGeneThreshold should be a
-                        numeric value greater than or
-                        equal to 0.")
+    # expressionData <- ensurer::ensure_that(expressionData,
+    #     !is.null(.) && is(.,"SummarizedExperiment") &&
+    #         !is.null(assay(.)) && (nrow(assay(.)) >
+    #         0) && (ncol(assay(.)) > 1) && (ncol(rowData(.)) ==
+    #         1) && (ncol(colData(.)) == 1),
+    #         err_desc = "expressionData should be a
+    #                     non-empty SummarizedExperiment object
+    #                     with atleast 1 gene and 2 tissues.")
+    # foldChangeThreshold <- ensurer::ensure_that(foldChangeThreshold,
+    #     !is.null(.) && is.numeric(.) && (. >= 1),
+    #         err_desc = "foldChangeThreshold should be a
+    #                     numeric value greater than
+    #                     or equal to 1.")
+    # maxNumberOfTissues <- ensurer::ensure_that(maxNumberOfTissues,
+    #                             !is.null(.) && is.numeric(.) && (. >= 2)
+    #                             && (. <= ncol(expressionData)),
+    #                             err_desc = "maxNumberOfTissues should be an
+    #                             integer value greater than or
+    #                             equal to 2 and less than the number
+    #                             of tissues in the expression data.")
+    # 
+    # expressedGeneThreshold <- ensurer::ensure_that(expressedGeneThreshold,
+    #     !is.null(.) && is.numeric(.) && (. >= 0),
+    #         err_desc = "expressedGeneThreshold should be a
+    #                     numeric value greater than or
+    #                     equal to 0.")
     minNumberOfTissues <- 2
     # start.time <- Sys.time()
     expData <- setNames(assay(expressionData), colData(expressionData)[,1])

@@ -65,37 +65,37 @@ teEnrichment <- function(inputGenes = NULL, rnaSeqDataset = 1,
     tissueSpecificGeneType = 1, multiHypoCorrection = TRUE,
     backgroundGenes = NULL) {
     ### Add checks for the conditions
-    inputGenes <- ensurer::ensure_that(inputGenes,
-        !is.null(.) && (is(.,"GeneSet")) && !is.null(geneIds(.)),
-        err_desc = "Please enter correct inputGenes.
-                    It should be a Gene set object.")
-    rnaSeqDataset <- ensurer::ensure_that(rnaSeqDataset,
-        !is.null(.) && is.numeric(.) && . <= 3 || . >=
-            1, err_desc = "Please enter correct
-                            rnaSeqDataset. It should be 1 for Human
-                            Protein Atlas, 2 for GTEx combine, 3 for
-                            GTEx sub-tissue, 4 for Mouse ENCODE.")
-    tissueSpecificGeneType <- ensurer::ensure_that(tissueSpecificGeneType,
-        !is.null(.) && is.numeric(.) && . <= 4 || . >=
-            1, err_desc = "Please enter correct
-                            tissueSpecificGeneType. It should be
-                            1 for All, 2 for Tissue-Enriched,3 for
-                            Tissue-Enhanced, and 4 for Group-Enriched")
-
-    multiHypoCorrection <- ensurer::ensure_that(multiHypoCorrection,
-        !is.null(.) && is.logical(.),
-        err_desc = "Please enter correct multiHypoCorrection.
-                    It should be either TRUE or FALSE")
+    # inputGenes <- ensurer::ensure_that(inputGenes,
+    #     !is.null(.) && (is(.,"GeneSet")) && !is.null(geneIds(.)),
+    #     err_desc = "Please enter correct inputGenes.
+    #                 It should be a Gene set object.")
+    # rnaSeqDataset <- ensurer::ensure_that(rnaSeqDataset,
+    #     !is.null(.) && is.numeric(.) && . <= 3 || . >=
+    #         1, err_desc = "Please enter correct
+    #                         rnaSeqDataset. It should be 1 for Human
+    #                         Protein Atlas, 2 for GTEx combine, 3 for
+    #                         GTEx sub-tissue, 4 for Mouse ENCODE.")
+    # tissueSpecificGeneType <- ensurer::ensure_that(tissueSpecificGeneType,
+    #     !is.null(.) && is.numeric(.) && . <= 4 || . >=
+    #         1, err_desc = "Please enter correct
+    #                         tissueSpecificGeneType. It should be
+    #                         1 for All, 2 for Tissue-Enriched,3 for
+    #                         Tissue-Enhanced, and 4 for Group-Enriched")
+    # 
+    # multiHypoCorrection <- ensurer::ensure_that(multiHypoCorrection,
+    #     !is.null(.) && is.logical(.),
+    #     err_desc = "Please enter correct multiHypoCorrection.
+    #                 It should be either TRUE or FALSE")
 
     geInputGenes <- inputGenes
     inputGenes <- geneIds(inputGenes)
 
-    backgroundGenes <- ensurer::ensure_that(backgroundGenes,
-        is.null(.) || (is(.,"GeneSet") && !is.null(geneIds(.)) &&
-        length(intersect(inputGenes,geneIds(.))) == length(unique(inputGenes))),
-        err_desc = "Please enter correct backgroundGenes.
-                    It should be a Gene set object.
-                    All input genes must be present in the background list")
+    # backgroundGenes <- ensurer::ensure_that(backgroundGenes,
+    #     is.null(.) || (is(.,"GeneSet") && !is.null(geneIds(.)) &&
+    #     length(intersect(inputGenes,geneIds(.))) == length(unique(inputGenes))),
+    #     err_desc = "Please enter correct backgroundGenes.
+    #                 It should be a Gene set object.
+    #                 All input genes must be present in the background list")
 
     bgGenesFlag <- FALSE
     if(!is.null(backgroundGenes))
