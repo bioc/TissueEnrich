@@ -63,45 +63,45 @@ teEnrichmentCustom <- function(inputGenes = NULL, tissueSpecificGenes = NULL,
     backgroundGenes = NULL) {
     # start.time <- Sys.time()
     ### Add checks for the conditions
-    inputGenes <- ensurer::ensure_that(inputGenes, !is.null(.) &&
-        (is(.,"GeneSet")) && !is.null(geneIds(.)),
-        err_desc = "Please enter correct inputGenes.
-                    It should be a Gene set object.")
-    ## Check for dataset class, rows and should not be NULL
-    tissueSpecificGenes <- ensurer::ensure_that(tissueSpecificGenes,
-        !is.null(.) && is(.,"SummarizedExperiment") &&
-        !is.null(assay(.)) &&
-        (nrow(assay(.)) > 0) &&
-        (ncol(assay(.)) > 1) &&
-        (ncol(colData(.)) == 1),
-            err_desc = "expressionData should
-            be a non-empty SummarizedExperiment
-            object with atleast 1 gene and 2
-            tissues.")
+    # inputGenes <- ensurer::ensure_that(inputGenes, !is.null(.) &&
+    #     (is(.,"GeneSet")) && !is.null(geneIds(.)),
+    #     err_desc = "Please enter correct inputGenes.
+    #                 It should be a Gene set object.")
+    # ## Check for dataset class, rows and should not be NULL
+    # tissueSpecificGenes <- ensurer::ensure_that(tissueSpecificGenes,
+    #     !is.null(.) && is(.,"SummarizedExperiment") &&
+    #     !is.null(assay(.)) &&
+    #     (nrow(assay(.)) > 0) &&
+    #     (ncol(assay(.)) > 1) &&
+    #     (ncol(colData(.)) == 1),
+    #         err_desc = "expressionData should
+    #         be a non-empty SummarizedExperiment
+    #         object with atleast 1 gene and 2
+    #         tissues.")
 
     tissueSpecificGenes <- setNames(data.frame(assay(tissueSpecificGenes)),
         colData(tissueSpecificGenes)[,1])
-    tissueSpecificGenes <- ensurer::ensure_that(tissueSpecificGenes,
-        !is.null(.) &&
-        is.data.frame(.) &&
-        !is.null(.) &&
-        (nrow(.) > 0) &&
-        (ncol(.) == 3),
-            err_desc = "Please enter correct tissueSpecificGenes. It should be
-                        a non-empty dataframe object.")
-    tissueSpecificGeneType <- ensurer::ensure_that(tissueSpecificGeneType,
-        !is.null(.) &&
-        is.numeric(.) && . <= 4 || . >= 1, err_desc = "Please enter correct
-                                                tissueSpecificGeneType. It
-                                                should be 1 for All,
-                                                2 for Tissue-Enriched,
-                                                3 for Tissue-Enhanced,
-                                                and 4 for Group-Enriched")
-    multiHypoCorrection <- ensurer::ensure_that(multiHypoCorrection,
-        !is.null(.) &&
-        is.logical(.), err_desc = "Please enter correct
-                                            multiHypoCorrection. It should be
-                                            either TRUE or FALSE")
+    # tissueSpecificGenes <- ensurer::ensure_that(tissueSpecificGenes,
+    #     !is.null(.) &&
+    #     is.data.frame(.) &&
+    #     !is.null(.) &&
+    #     (nrow(.) > 0) &&
+    #     (ncol(.) == 3),
+    #         err_desc = "Please enter correct tissueSpecificGenes. It should be
+    #                     a non-empty dataframe object.")
+    # tissueSpecificGeneType <- ensurer::ensure_that(tissueSpecificGeneType,
+    #     !is.null(.) &&
+    #     is.numeric(.) && . <= 4 || . >= 1, err_desc = "Please enter correct
+    #                                             tissueSpecificGeneType. It
+    #                                             should be 1 for All,
+    #                                             2 for Tissue-Enriched,
+    #                                             3 for Tissue-Enhanced,
+    #                                             and 4 for Group-Enriched")
+    # multiHypoCorrection <- ensurer::ensure_that(multiHypoCorrection,
+    #     !is.null(.) &&
+    #     is.logical(.), err_desc = "Please enter correct
+    #                                         multiHypoCorrection. It should be
+    #                                         either TRUE or FALSE")
     groups <- list(c("Tissue-Enriched", "Tissue-Enhanced", "Group-Enriched"),
         "Tissue-Enriched", "Tissue-Enhanced", "Group-Enriched")
 
@@ -116,12 +116,12 @@ teEnrichmentCustom <- function(inputGenes = NULL, tissueSpecificGenes = NULL,
     inputGenes <- geneIds(inputGenes)
     inputGenes <- unique(inputGenes)
 
-    backgroundGenes <- ensurer::ensure_that(backgroundGenes,
-        is.null(.) || (is(.,"GeneSet") && !is.null(geneIds(.)) &&
-        length(intersect(inputGenes,geneIds(.))) == length(inputGenes)),
-        err_desc = "Please enter correct backgroundGenes.
-        It should be a Gene set object.
-        All input genes must be present in the background list")
+    # backgroundGenes <- ensurer::ensure_that(backgroundGenes,
+    #     is.null(.) || (is(.,"GeneSet") && !is.null(geneIds(.)) &&
+    #     length(intersect(inputGenes,geneIds(.))) == length(inputGenes)),
+    #     err_desc = "Please enter correct backgroundGenes.
+    #     It should be a Gene set object.
+    #     All input genes must be present in the background list")
 
     totalGenes <- as.character(unique(tissueSpecificGenes$Gene))
     genesNotFound <- GeneSet(geneIds = base::setdiff(inputGenes, totalGenes))

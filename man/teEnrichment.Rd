@@ -4,9 +4,13 @@
 \alias{teEnrichment}
 \title{Calculate tissue-specific gene enrichment using the hypergeometric test}
 \usage{
-teEnrichment(inputGenes = NULL, rnaSeqDataset = 1,
-  tissueSpecificGeneType = 1, multiHypoCorrection = TRUE,
-  backgroundGenes = NULL)
+teEnrichment(
+  inputGenes = NULL,
+  rnaSeqDataset = 1,
+  tissueSpecificGeneType = 1,
+  multiHypoCorrection = TRUE,
+  backgroundGenes = NULL
+)
 }
 \arguments{
 \item{inputGenes}{A GeneSet object containing the input genes, organism type

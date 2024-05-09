@@ -5,9 +5,13 @@
 \title{Calculate tissue-specific gene enrichment using the hypergeometric test for
 custom datasets}
 \usage{
-teEnrichmentCustom(inputGenes = NULL, tissueSpecificGenes = NULL,
-  tissueSpecificGeneType = 1, multiHypoCorrection = TRUE,
-  backgroundGenes = NULL)
+teEnrichmentCustom(
+  inputGenes = NULL,
+  tissueSpecificGenes = NULL,
+  tissueSpecificGeneType = 1,
+  multiHypoCorrection = TRUE,
+  backgroundGenes = NULL
+)
 }
 \arguments{
 \item{inputGenes}{An GeneSet object containing the input genes.}
@@ -45,7 +49,7 @@ the teGeneRetrieval function.
 library(dplyr)
 data<-system.file('extdata', 'test.expressiondata.txt', package =
 'TissueEnrich')
-expressionData<-read.table(data,header=TRUE,row.names=1,sep='\\t')
+expressionData<-read.table(data,header=TRUE,row.names=1,sep='\t')
 se<-SummarizedExperiment(assays = SimpleList(as.matrix(expressionData)),
 rowData = row.names(expressionData),colData = colnames(expressionData))
 output<-teGeneRetrieval(se)
